@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/files', [FileController::class, 'index']);
-Route::post('/files/report', [FileController::class, 'report']);
+Route::get('/files/report', [FileController::class, 'report']);
 Route::post('/files/save', [FileController::class, 'store']);

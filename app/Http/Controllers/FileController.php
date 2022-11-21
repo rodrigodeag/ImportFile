@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FilesModel;
 use App\Models\ClientModel;
 use App\Models\StoreModel;
 use App\Models\TransactionModel;
@@ -26,19 +25,20 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $file = file_get_contents($input["file"]);
-        $file = trim($file);
-        $file = explode(',' , $file);
-       
-        foreach ($file as $val) {
-            $type = substr($val, 0, 1);
-            $date = substr($val, 1, 8);
-            $value = substr($val, 9, 10) / 100;
-            $cpf = substr($val, 19, 11);
-            $card = substr($val, 30, 12);
-            $hour = substr($val, 42, 6);
-            $representative = substr($val, 48, 14);
-            $store_name = substr($val, 62, 19);
+        $file = file($input["file"]);
+
+        foreach ($file as $line => $values) {
+            $line = trim($values);
+	        $val = explode(',', $line);
+
+            $type = substr($val[0], 0, 1);
+            $date = substr($val[0], 1, 8);
+            $value = substr($val[0], 9, 10) / 100;
+            $cpf = substr($val[0], 19, 11);
+            $card = substr($val[0], 30, 12);
+            $hour = substr($val[0], 42, 6);
+            $representative = substr($val[0], 48, 14);
+            $store_name = substr($val[0], 62, 19);
             
             $cpf_valid = Clientmodel::where('cpf', $cpf)->first();
             if (!$cpf_valid) {
@@ -48,26 +48,42 @@ class FileController extends Controller
                 $client->status = '1';
                 $client->save();
             } else {
-                $id_client = Clientmodel::where('cpf', $cpf)->first();
+                $id_client = $cpf_valid->id;
             }
 
             $store_valid = StoreModel::where('name', $store_name)
-                ->and('representative', $representative)->first();
+                ->where('representative', $representative)->first();
+            if (!$store_valid) {
+                $store = new StoreModel;
+                $store->name = $store_name;
+                $store->representative = $representative;
+                $store->save();
+            } else {
+                $id_store = $store_valid->id;
+            }
+            
+            $transaction = new TransactionModel;
+            $transaction->id_transaction_type = $type;
+            $transaction->date = $date;
+            $transaction->hour = $hour;
+            $transaction->id_client = $id_client;
+            $transaction->id_store = $id_store;
+            $transaction->value = $value;
+            $transaction->save();
         }
-        $store = new StoreModel;
-        $store->name = $store_name;
-        $store->representative = $representative;
-        $store->save();
-
-        $transaction = new TransactionModel;
-        $transaction->id_transaction_type = $type;
-        $transaction->date = $date;
-        $transaction->hour = $hour;
-        /*$transaction->id_client = $id_client;
-        $transaction->id_store = $id_store;*/
-        /*$transaction->value = $value;
-        $transaction->save();*/
-
         return view('files.report');
+    }
+
+    public function report(Request $request){
+        $report = TransactionModel::select('transaction.id as id_transaction', 'transaction.hour', 'transaction.date', 'client.cpf',
+            'client.card', 'store.name', 'store.representative', 'transaction_type.nature', 'transaction.value',
+            'transaction_type.signal', 'store.id as id_store')
+            ->join('client', 'client.id', '=', 'transaction.id_client')
+            ->join('store', 'store.id', '=', 'transaction.id_client')
+            ->join('transaction_type', 'transaction_type.id', '=', 'transaction.id_transaction_type')
+            ->orderByRaw('store.id')
+            ->get();
+
+        return view('files.report')->with(['report' => $report]); //, '_REQUEST' => $_REQUEST
     }
 }
