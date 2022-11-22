@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "08f97c4c-3ecd-4aa9-82d2-fd4f0285febb",
+		"name": "Challenger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24390965"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "GetAllClient",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/client/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"client",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClientById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "GetReportByStoreId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reportStore/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reportStore",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReportAllStore",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reportStore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reportStore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReportAllClient",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reportClient/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reportClient",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReportByClientId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reportStore/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reportStore",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "GetAllStore",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/store/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"store",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStoreById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/desafio-dev/CNAB.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/store/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"store",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
