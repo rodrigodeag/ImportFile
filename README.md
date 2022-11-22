@@ -7,6 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Description Project
+
+This project was created with the intention of importing a file type, after generating a report with file data. And also be consumed as API.
+
+## Installing and running the project
+
+- Preparing the environment to run the project locally you will need a local MySql database, PHP version 8.1 or higher, Composer and Postman to test the API consumption.
+- To run the project, you must access the project directory and run the 'composer instaal' command in the bash terminal, after running the 'php artisan serve' command to 
+  start the local PHP server and its Laravel dependencies.
+- Make a copy of the ".env.example" file and rename it to ".env" after renaming open the ".env" file and perform the MySql database settings according to your local database.
+- Import database dump to local database.
+- To consume the API import the json file in postman.
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
