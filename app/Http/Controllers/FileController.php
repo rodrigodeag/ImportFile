@@ -71,19 +71,73 @@ class FileController extends Controller
             $transaction->value = $value;
             $transaction->save();
         }
-        return view('files.report');
+        return redirect('files/report');
     }
 
     public function report(Request $request){
         $report = TransactionModel::select('transaction.id as id_transaction', 'transaction.hour', 'transaction.date', 'client.cpf',
             'client.card', 'store.name', 'store.representative', 'transaction_type.nature', 'transaction.value',
-            'transaction_type.signal', 'store.id as id_store')
+            'transaction_type.signal', 'store.id as id_store', TransactionModel::raw("CONCAT(transaction_type.signal, transaction.value) as valor"))
             ->join('client', 'client.id', '=', 'transaction.id_client')
             ->join('store', 'store.id', '=', 'transaction.id_client')
             ->join('transaction_type', 'transaction_type.id', '=', 'transaction.id_transaction_type')
             ->orderByRaw('store.id')
             ->get();
 
-        return view('files.report')->with(['report' => $report]); //, '_REQUEST' => $_REQUEST
+        return view('files.report')->with(['report' => $report]);
+    }
+
+    public function apiReportAllStore(Request $request){
+        $report = TransactionModel::select('transaction.id as id_transaction', 'transaction.hour', 'transaction.date', 'client.cpf',
+            'client.card', 'store.name', 'store.representative', 'transaction_type.nature', 'transaction.value',
+            'transaction_type.signal', 'store.id as id_store', TransactionModel::raw("CONCAT(transaction_type.signal, transaction.value) as valor"))
+            ->join('client', 'client.id', '=', 'transaction.id_client')
+            ->join('store', 'store.id', '=', 'transaction.id_client')
+            ->join('transaction_type', 'transaction_type.id', '=', 'transaction.id_transaction_type')
+            ->orderByRaw('store.id')
+            ->get();
+
+        return response($report, 200); //, '_REQUEST' => $_REQUEST
+    }
+
+    public function apiReportByStoreId(Request $request, $id_store){
+        $report = TransactionModel::select('transaction.id as id_transaction', 'transaction.hour', 'transaction.date', 'client.cpf',
+            'client.card', 'store.name', 'store.representative', 'transaction_type.nature', 'transaction.value',
+            'transaction_type.signal', 'store.id as id_store', TransactionModel::raw("CONCAT(transaction_type.signal, transaction.value) as valor"))
+            ->join('client', 'client.id', '=', 'transaction.id_client')
+            ->join('store', 'store.id', '=', 'transaction.id_client')
+            ->join('transaction_type', 'transaction_type.id', '=', 'transaction.id_transaction_type')
+            ->where('store.id', $id_store)
+            ->orderByRaw('store.id')
+            ->get();
+
+        return response($report, 200); //, '_REQUEST' => $_REQUEST
+    }
+
+    public function apiReportAllClient(Request $request){
+        $report = TransactionModel::select('transaction.id as id_transaction', 'transaction.hour', 'transaction.date', 'client.cpf',
+            'client.card', 'store.name', 'store.representative', 'transaction_type.nature', 'transaction.value',
+            'transaction_type.signal', 'store.id as id_store', TransactionModel::raw("CONCAT(transaction_type.signal, transaction.value) as valor"))
+            ->join('client', 'client.id', '=', 'transaction.id_client')
+            ->join('store', 'store.id', '=', 'transaction.id_client')
+            ->join('transaction_type', 'transaction_type.id', '=', 'transaction.id_transaction_type')
+            ->orderByRaw('client.id')
+            ->get();
+
+        return response($report, 200); //, '_REQUEST' => $_REQUEST
+    }
+
+    public function apiReportByClientId(Request $request, $id_client){
+        $report = TransactionModel::select('transaction.id as id_transaction', 'transaction.hour', 'transaction.date', 'client.cpf',
+            'client.card', 'store.name', 'store.representative', 'transaction_type.nature', 'transaction.value',
+            'transaction_type.signal', 'store.id as id_store', TransactionModel::raw("CONCAT(transaction_type.signal, transaction.value) as valor"))
+            ->join('client', 'client.id', '=', 'transaction.id_client')
+            ->join('store', 'store.id', '=', 'transaction.id_client')
+            ->join('transaction_type', 'transaction_type.id', '=', 'transaction.id_transaction_type')
+            ->where('client.id', $id_client)
+            ->orderByRaw('client.id')
+            ->get();
+
+        return response($report, 200); //, '_REQUEST' => $_REQUEST
     }
 }
