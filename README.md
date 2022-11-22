@@ -19,6 +19,7 @@ This project was created with the intention of importing a file type, after gene
 - Make a copy of the ".env.example" file and rename it to ".env" after renaming open the ".env" file and perform the MySql database settings according to your local database.
 - Import database dump to local database.
 - To consume the API import the json file in postman.
+- Example of access http://127.0.0.1:8000/files
 
 
 ## About Laravel
